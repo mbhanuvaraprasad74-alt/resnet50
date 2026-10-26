@@ -1,0 +1,36 @@
+# Python virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyTorch checkpoints and large model files
+*.pth
+*.pt
+*.bin
+*.onnx
+
+# Datasets and outputs
+data/
+dataset/
+logs/
+checkpoints/
+runs/
+
+# IDE / Editor folders
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
