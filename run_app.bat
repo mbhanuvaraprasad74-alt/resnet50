@@ -1,4 +1,5 @@
 @echo off
+set OMP_NUM_THREADS=1
 title PulmoScan AI - ResNet-50 Diagnostic Web Application
 echo ======================================================================
 echo    PulmoScan AI - ResNet50 Radiographic Diagnostic Web Application

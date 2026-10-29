@@ -1,0 +1,31 @@
+﻿L  82 | U+00F0 | page_icon="├░┼╕┬½┬ü",
+L 146 | U+00E2 | - COVID-19: diffuse bilateral texture changes (GGO) ├óΓé¼ΓÇ¥ moderate gradients
+L 322 | U+00E2 | Key insight: In a real X-ray / CT scan, almost EVERY pixel has R ├óΓÇ░╦å G ├óΓÇ░╦å B
+L 323 | U+00E2 | (it is a grayscale image stored in RGB).  In a colour photograph ├óΓé¼ΓÇ¥ even one
+L 324 | U+00E2 | with a very dark background ├óΓé¼ΓÇ¥ many pixels will have distinct R, G, B values
+L 328 | U+00E2 | 1. Per-pixel grayscale test  ├óΓÇáΓÇÖ  fraction of pixels where R,G,B differ by
+L 329 | U+00E2 | more than a small threshold.  High fraction ├óΓÇíΓÇÖ colour photo.
+L 330 | U+00E2 | 2. Skin-tone pixel detection ├óΓÇáΓÇÖ  warm-toned pixels in the human skin range.
+L 343 | U+00E2 | # A true X-ray has R├óΓÇ░╦åG├óΓÇ░╦åB for virtually every pixel.
+L 357 | U+00E2 | if colour_fraction > 0.08:  # >8% of visible pixels are coloured ├óΓÇáΓÇÖ photo
+L 361 | U+00E2 | f"(threshold: 8%). Chest X-Rays and CT scans are grayscale ├óΓé¼ΓÇ¥ every pixel "
+L 378 | U+00E2 | if skin_fraction > 0.04:  # >4% skin-tone pixels ├óΓÇáΓÇÖ selfie / portrait
+L 427 | U+00E2 | Radiographic image analysis heuristic ├óΓé¼ΓÇ¥ calibrated to avoid
+L 431 | U+00E2 | - Normal X-rays naturally have slightly brighter upper zones (bone) ├óΓé¼ΓÇ¥ NOT TB.
+L 525 | U+00E2 | # Normal ribs cause small upper brightness ├óΓé¼ΓÇ¥ require BOTH large diff AND high 
+L 628 | U+00E2 | # No trained model available ├óΓé¼ΓÇ¥ use radiographic image analysis heuristics
+L 651 | U+00F0 | st.sidebar.title("├░┼╕┬½┬ü PulmoScan AI")
+L 655 | U+00F0 | st.sidebar.subheader("├░┼╕ΓÇÿ┬ñ Patient Metadata")
+L 666 | U+00E2 | st.sidebar.subheader("├ó┼íΓäó├»┬╕┬Å Radiography Parameters")
+L 684 | U+00E2 | st.markdown('<div class="badge-sub">Major Project SJCET CSE ├óΓé¼┬ó Radiographic Mul
+L 690 | U+00F0 | "├░┼╕┬⌐┬║ Diagnostic Studio",
+L 691 | U+00F0 | "├░┼╕┬º┬¬ Preset Demo Cases",
+L 692 | U+00F0 | "├░┼╕┼╜┬» Grad-CAM (XAI)",
+L 693 | U+00F0 | "├░┼╕ΓÇ¥┬¼ Preprocessing Lab",
+L 694 | U+00F0 | "├░┼╕ΓÇ£┼á Benchmark & Metrics",
+L 695 | U+00F0 | "├░┼╕ΓÇ£ΓÇ₧ Clinical Report",
+L 696 | U+00F0 | "├░┼╕┬ñΓÇô ML & Deep Learning",
+L 697 | U+00E2 | "├ó┼íΓÇ║├»┬╕┬Å Quantum + AI"
+L 722 | U+00E2 | f"├óΓÇ║ΓÇ¥ **Invalid Image Rejected**\n\n"
+L 734 | U+00F0 | st.info("├░┼╕ΓÇÿ╦å Please upload a radiographic scan above, or switch to the **'├░┼╕┬º┬¬ 
+Total: 87

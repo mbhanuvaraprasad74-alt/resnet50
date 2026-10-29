@@ -7,8 +7,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import models
 from torchvision.models import ResNet50_Weights
-import numpy as np
-import cv2
+try:
+    import cv2
+except ImportError:
+    cv2 = None
 
 
 class ResNet50PulmonaryClassifier(nn.Module):
@@ -109,18 +111,27 @@ class GradCAM:
         return cam, target_class
 
 
-def overlay_cam_on_image(original_img_pil, heatmap, alpha=0.5, colormap=cv2.COLORMAP_JET):
+def overlay_cam_on_image(original_img_pil, heatmap, alpha=0.5, colormap=None):
     """
     Overlays a normalized Grad-CAM heatmap onto the original PIL image.
+    Works seamlessly with OpenCV if present, or PIL/Matplotlib fallback.
     """
     orig_np = np.array(original_img_pil.convert("RGB"))
     h, w, _ = orig_np.shape
     
-    # Resize heatmap to match image dimensions
-    heatmap_resized = cv2.resize(heatmap, (w, h))
-    heatmap_uint8 = np.uint8(255 * heatmap_resized)
-    color_map = cv2.applyColorMap(heatmap_uint8, colormap)
-    color_map = cv2.cvtColor(color_map, cv2.COLOR_BGR2RGB)
+    if cv2 is not None:
+        cm = colormap if colormap is not None else cv2.COLORMAP_JET
+        heatmap_resized = cv2.resize(heatmap, (w, h))
+        heatmap_uint8 = np.uint8(255 * heatmap_resized)
+        color_map = cv2.applyColorMap(heatmap_uint8, cm)
+        color_map = cv2.cvtColor(color_map, cv2.COLOR_BGR2RGB)
+    else:
+        import matplotlib.pyplot as plt
+        from PIL import Image
+        hm_pil = Image.fromarray(np.uint8(255 * heatmap)).resize((w, h), Image.Resampling.BILINEAR)
+        hm_norm = np.array(hm_pil).astype(np.float32) / 255.0
+        cmap = plt.get_cmap("jet")
+        color_map = (cmap(hm_norm)[:, :, :3] * 255).astype(np.uint8)
 
     # Blend original image and heatmap
     blended = np.uint8(alpha * color_map + (1 - alpha) * orig_np)

@@ -4,9 +4,12 @@ for Pulmonary Condition Classification from Radiographic Scans (X-Ray & CT).
 """
 
 import os
-import cv2
+try:
+    import cv2
+except ImportError:
+    cv2 = None
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageOps
 import torch
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
@@ -24,13 +27,17 @@ class MedicalCLAHE:
         self.tile_grid_size = tile_grid_size
 
     def __call__(self, img_pil):
-        # Convert PIL Image to Grayscale / OpenCV array
-        img_np = np.array(img_pil.convert("L"))
-        clahe = cv2.createCLAHE(clipLimit=self.clip_limit, tileGridSize=self.tile_grid_size)
-        enhanced = clahe.apply(img_np)
-        # Convert back to 3-channel RGB for ResNet50
-        enhanced_rgb = cv2.cvtColor(enhanced, cv2.COLOR_GRAY2RGB)
-        return Image.fromarray(enhanced_rgb)
+        if cv2 is not None:
+            # Convert PIL Image to Grayscale / OpenCV array
+            img_np = np.array(img_pil.convert("L"))
+            clahe = cv2.createCLAHE(clipLimit=self.clip_limit, tileGridSize=self.tile_grid_size)
+            enhanced = clahe.apply(img_np)
+            # Convert back to 3-channel RGB for ResNet50
+            enhanced_rgb = cv2.cvtColor(enhanced, cv2.COLOR_GRAY2RGB)
+            return Image.fromarray(enhanced_rgb)
+        else:
+            equalized = ImageOps.equalize(img_pil.convert("L"))
+            return equalized.convert("RGB")
 
 
 def get_data_transforms(img_size=224, apply_clahe=True):
